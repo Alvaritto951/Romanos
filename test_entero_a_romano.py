@@ -21,5 +21,8 @@ def test_3_es_igual_a_2_mas_uno():
 def test_error_si_entero_mayor_de_3999():
     assert entero_a_romano(1994) == 'MCMXCIV'
 
-def teast_descomposicion_336():
-    assert entero_a_romano(336) == ['0000', '300', '30', '6'] #=> 'CCCXXXVI'
+def test_descomposicion_336():
+    assert entero_a_romano(336) == 'CCCXXXVI' #['0000', '300', '30', '6'] 
+
+def test_descomposicion_1336():
+    assert entero_a_romano(1336) == 'MCCCXXXVI'
