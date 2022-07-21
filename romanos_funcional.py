@@ -13,8 +13,11 @@ componentes = {
 }
 
 simbolos_romanos = {
-    'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1
+    'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1, "": 0
 }
+
+class RomanNumberError(Exception):
+    pass
 
 def entero_a_romano(numero):
     numero = "{:0>4d}".format(numero)
@@ -32,7 +35,21 @@ def entero_a_romano(numero):
 
 def romano_a_entero(romano: str) -> int:
     r = 0
+    cont_repes = 1
+    car_anterior = ""
     for caracter in romano:
+        if caracter == car_anterior:
+            cont_repes += 1
+        else:
+            cont_repes = 1
+        
+        if cont_repes > 3:
+            raise RomanNumberError("No se pueden dar más de tres repeticiones")
+        
+        if simbolos_romanos[caracter] > simbolos_romanos[car_anterior]:
+            r -= simbolos_romanos[car_anterior] * 2
+
         r += simbolos_romanos[caracter]
+        car_anterior = caracter
 
     return r
