@@ -8,8 +8,15 @@
 class RomanNumberError(Exception):
     pass
 
-numero_romano = (
-    (1000, 'M'), (500, 'D'), (100, 'C'), (50, 'L'), (10, 'X'), (5, 'V'), (1, 'I')
+numero_romano = {
+    1000: 'M', 500: 'D', 100: 'C', 50: 'L', 10: 'X', 5: 'V', 1: 'I'
+}
+
+algoritmo_romano = (
+    {1: 'M'},
+    {1: 'C', 5: 'D', 10: 'M'},
+    {1: 'X', 5: 'L', 10: 'C'},
+    {1: 'I', 5: 'V', 10: 'X'},
 )
 
 componentes = {
@@ -26,6 +33,44 @@ componentes = {
     7: 'VII', 8: 'VIII', 9: 'IX',
 }
 
+def entero_a_romano_2(numero):
+    numero = "{:0>4d}".format(numero)
+    digitos = list(numero)
+
+    romano = ""
+
+    for digito in digitos:
+        digito = int(digito)  
+    
+        if digito < 4:
+            romano += algoritmo_romano[0][1] * digito
+        elif int(digitos[1]) == 4:
+            romano += numero_romano[100] + numero_romano[500]
+        elif int(digitos[1]) < 9:
+            romano += numero_romano[500] + numero_romano[100] * (int(digitos[1]) - 5)
+        else:
+            romano += numero_romano[100] + numero_romano[1000]
+
+    if int(digitos[2]) < 4:
+        romano += numero_romano[10] * int(digitos[0])
+    elif int(digitos[2]) == 4:
+        romano += numero_romano[10] + numero_romano[50]
+    elif int(digitos[2]) < 9:
+        romano += numero_romano[50] + numero_romano[10] * (int(digitos[2]) - 5)
+    else:
+        romano += numero_romano[10] + numero_romano[100]
+    
+    if int(digitos[3]) < 4:
+        romano += numero_romano[1] * int(digitos[0])
+    elif int(digitos[3]) == 4:
+        romano += numero_romano[1] + numero_romano[5]
+    elif int(digitos[3]) < 9:
+        romano += numero_romano[5] + numero_romano[1] * (int(digitos[3]) - 5)
+    else:
+        romano += numero_romano[1] + numero_romano[10]
+
+
+
 
 def entero_a_romano(numero):
     '''
@@ -41,11 +86,11 @@ def entero_a_romano(numero):
     ix = 0
     longitud = len(digitos)
     romano = ""
-    for n in numero:
+    for ix in range(len(numero)):
         longitud -= 1
         digitos[ix] = digitos[ix] + "0" * longitud
         romano += componentes.get(int(digitos[ix]), "")
-        ix += 1   
+          
     return romano
     
 
