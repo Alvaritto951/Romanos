@@ -48,3 +48,8 @@ def test_romano_solo_hasta_un_orden_de_magnitud_en_la_resta():
     with pytest.raises(RomanNumberError) as exceptionInfo:
         romano_a_entero('IC')
     assert str(exceptionInfo.value) == "I solo se puede restar a V y X"
+
+def test_no_se_puede_repetir_VLD():
+    with pytest.raises(RomanNumberError) as exceptionInfo:
+        romano_a_entero('DD')
+    assert str(exceptionInfo.value) == "No se puede repetir D"
