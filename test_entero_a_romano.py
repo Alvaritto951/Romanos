@@ -53,3 +53,13 @@ def test_no_se_puede_repetir_VLD():
     with pytest.raises(RomanNumberError) as exceptionInfo:
         romano_a_entero('DD')
     assert str(exceptionInfo.value) == "No se puede repetir D"
+
+def test_si_hay_repeticion_no_hay_resta():
+    with pytest.raises(RomanNumberError) as exceptionInfo:
+        romano_a_entero('IIX')
+    assert str(exceptionInfo.value) == "Si hay repeticion ya no se resta"
+
+def test_no_se_puede_repetir_dos_restas():
+    with pytest.raises(RomanNumberError) as exceptionInfo:
+        romano_a_entero('IXIX')
+    assert str(exceptionInfo.value) == "No puedes introducir dos restas iguales"

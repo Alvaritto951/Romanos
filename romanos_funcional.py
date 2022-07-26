@@ -47,6 +47,7 @@ def romano_a_entero(romano: str) -> int:
     cont_repes = 1
     #variable para guardar el caracter
     car_anterior = ""
+    car_anteanterior = ""
     for caracter in romano:
         if caracter == car_anterior:
             cont_repes += 1
@@ -65,12 +66,17 @@ def romano_a_entero(romano: str) -> int:
             
             if caracter not in restas[car_anterior]:
                raise RomanNumberError(f"{car_anterior} solo se puede restar a {restas[car_anterior][0]} y {restas[car_anterior][1]}")
+            
+            if car_anterior == car_anteanterior:
+                raise RomanNumberError("Si hay repeticion ya no se resta")
 
             r -= simbolos_romanos[car_anterior] * 2
 
         r += simbolos_romanos[caracter]
+        car_anteanterior = car_anterior
         car_anterior = caracter
 
     return r
+    #print(r)
 
 romano_a_entero("II")
