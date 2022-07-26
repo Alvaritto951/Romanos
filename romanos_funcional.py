@@ -1,3 +1,4 @@
+#entero_a_romano
 componentes = {
     
     1000: 'M', 2000: 'MM', 3000: 'MMM',
@@ -12,6 +13,7 @@ componentes = {
     7: 'VII', 8: 'VIII', 9: 'IX',
 }
 
+#romano_a_entero
 simbolos_romanos = {
     'M': 1000, 'D': 500, 'C': 100, 'L': 50, 'X': 10, 'V': 5, 'I': 1, "": 0
 }
