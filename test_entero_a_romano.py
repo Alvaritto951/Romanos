@@ -43,3 +43,8 @@ def test_romano_a_entero_no_mas_de_tres():
 
 def test_romano_a_entero_resta_si_soy_mayor_que_anterior():
     assert romano_a_entero('IV') == 4
+
+def test_romano_solo_hasta_un_orden_de_magnitud_en_la_resta():
+    with pytest.raises(RomanNumberError) as exceptionInfo:
+        romano_a_entero('IC')
+    assert str(exceptionInfo.value) == "I solo se puede restar a V y X"
