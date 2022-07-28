@@ -91,9 +91,21 @@ class NumeroRomano:
             return NumeroRomano(self.valor + otro.valor)
         elif isinstance(otro, int):
             return NumeroRomano(self.valor + otro)
+        elif isinstance(otro, float):
+            return NumeroRomano(self.valor + int(otro))
     
     def __radd__(self, otro):
-        pass
+        return self.__add__(otro)
+
+    def __sub__(self, otro):
+        if isinstance(otro, NumeroRomano):
+            return NumeroRomano(self.valor - otro.valor)
+        elif isinstance(otro, int):
+            return NumeroRomano(self.valor - otro)
+        elif isinstance(otro, float):
+            return NumeroRomano(self.valor - int(otro))
+
+    #Falta definir __rsub__
 
     def __repr__(self):
         return self.representacion
